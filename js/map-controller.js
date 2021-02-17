@@ -30,9 +30,21 @@ window.onload = () => {
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
+            console.log('User latitude is:', pos.coords.latitude);
+            console.log('User longitude is:', pos.coords.longitude);
+            initMap(pos.coords.latitude, pos.coords.longitude);
+            // onShowLocation(pos);
+            addMarker({lat: 33.183, lng: 35.599});
+            // addMarker({lat: [pos.coords.latitude, lng]: pos.coords.longitude})
         })
+        // .then(pos => {
+        //     console.log('marker pos', pos);
+        //     addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+
+        // })
         .catch(err => {
             console.log('err!!!', err);
+            onHandleLocationError();
         })
     mapService._createPlaces();
     renderPlaces();
@@ -66,6 +78,13 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             console.log('Map!', gMap);
+            gMap.addListener("click", (mapsMouseEvent) => {
+                var lat = mapsMouseEvent.latLng.lat();
+                var lng = mapsMouseEvent.latLng.lng();
+                var locationName = prompt('Enter location name');
+                mapService.addPlace(lat, lng, locationName);
+                renderPlaces();
+            })
         })
 }
 
@@ -79,7 +98,7 @@ function onGoToPlace(placeId) {
     initMap(place.lat, place.lng);
 }
 
-function onShowMyLocation(){
+function onShowMyLocation() {
     if (!navigator.geolocation) {
         alert("HTML5 Geolocation is not supported in your browser.");
         return;

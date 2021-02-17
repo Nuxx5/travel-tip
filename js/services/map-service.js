@@ -1,6 +1,7 @@
 'use strict';
 
-import { utilService } from './storage-service.js';
+import { storageService } from './storage-service.js';
+import { utilService } from './util-service.js';
 
 export const mapService = {
     getLocs,
@@ -53,7 +54,7 @@ function getPlaceById(placeId) {
 
 function _createPlaces() {
     const STORAGE_KEY = 'places';
-    var places = utilService.loadFromStorage(STORAGE_KEY);
+    var places = storageService.loadFromStorage(STORAGE_KEY);
     if (!places || !places.length) {
         places = [];
     }
@@ -63,7 +64,7 @@ function _createPlaces() {
 
 function _createPlace(lat, lng, locationName) {
     return {
-        id: makeId(),
+        id: utilService.makeId(),
         lat: lat,
         lng: lng,
         name: locationName,
@@ -72,5 +73,5 @@ function _createPlace(lat, lng, locationName) {
 
 function _savePlacesToStorage() {
     const STORAGE_KEY = 'places';
-    utilService.saveToStorage(STORAGE_KEY, gPlaces);
+    storageService.saveToStorage(STORAGE_KEY, gPlaces);
 }
