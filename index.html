@@ -8,7 +8,7 @@
     <title>Travel-Tip</title>
 </head>
 
-<body onload="onInit()">
+<body>
     <main class="main-container">
         <header class="header">
             <h1>TravelTip</h1>
@@ -27,8 +27,19 @@
             <div class="content">
                 <div class="weather">
                 </div>
-                <div class="table-location">
-                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Place</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-data">
+                    </tbody>
+                </table>
                 <button class="btn">Click Me</button>
             </div>
             <div class="map">

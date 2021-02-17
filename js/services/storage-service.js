@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-export const storageService = {
+export const utilService = {
     saveToStorage,
     loadFromStorage
 }

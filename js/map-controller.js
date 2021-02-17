@@ -1,14 +1,21 @@
+'use strict';
+
 import { mapService } from './services/map-service.js';
-import { storageService } from './services/storage-service.js';
+
+// window.onSearch = onSearch;
+window.onGoToPlace = onGoToPlace;
+window.onRemovePlace = onRemovePlace;
+window.onShowMyLocation = onShowMyLocation;
 
 var gMap;
 console.log('Main!');
+
 
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    
+
     document.querySelector('.btn').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
@@ -27,6 +34,25 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+    mapService._createPlaces();
+    renderPlaces();
+}
+
+function renderPlaces() {
+    var places = mapService.getPlaces();
+    console.log('places', places);
+    var strHTMLs = places.map(function (place) {
+        return `<tr>
+                    <td>${places.indexOf(place) + 1}</td>
+                    <td>${place.name}</td>
+                    <td>${place.lat.toFixed(6)}</td>
+                    <td>${place.lng.toFixed(6)}</td>
+                    <td><button type="button" class="goto-btn" onclick="onGoToPlace('${place.id}')">Go To</button></td>
+                    <td><button type="button" class="dalete-btn" onclick="onRemovePlace('${place.id}')">Delete</button></td>
+                </tr>`;
+    })
+    var elBoard = document.querySelector('.table-data');
+    elBoard.innerHTML = strHTMLs.join('');
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -41,6 +67,46 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             console.log('Map!', gMap);
         })
+}
+
+function onRemovePlace(placeId) {
+    mapService.removePlace(placeId);
+    renderPlaces();
+}
+
+function onGoToPlace(placeId) {
+    var place = mapService.getPlaceById(placeId)
+    initMap(place.lat, place.lng);
+}
+
+function onShowMyLocation(){
+    if (!navigator.geolocation) {
+        alert("HTML5 Geolocation is not supported in your browser.");
+        return;
+    }
+    navigator.geolocation.getCurrentPosition(onShowLocation, onHandleLocationError);
+}
+
+function onShowLocation(position) {
+    initMap(position.coords.latitude, position.coords.longitude);
+}
+
+function onHandleLocationError(error) {
+    var locationError = document.getElementById("locationError");
+    switch (error.code) {
+        case 0:
+            locationError.innerHTML = "There was an error while retrieving your location: " + error.message;
+            break;
+        case 1:
+            locationError.innerHTML = "The user didn't allow this page to retrieve a location.";
+            break;
+        case 2:
+            locationError.innerHTML = "The browser was unable to determine your location: " + error.message;
+            break;
+        case 3:
+            locationError.innerHTML = "The browser timed out before retrieving the location.";
+            break;
+    }
 }
 
 function addMarker(loc) {

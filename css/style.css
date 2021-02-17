@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
 }
@@ -14,7 +18,7 @@ button {
 }
 
 .main-container {
-    width: 650px;
+    width: 850px;
     height: 550px;
     margin: 0 auto;
     padding: 20px 10px 0 10px;
@@ -37,7 +41,7 @@ h1 {
 }
 
 .search-text {
-    height: 25px;
+    height: 30px;
     width: 150px;
 }
 
@@ -61,17 +65,30 @@ h1 {
 }
 
 .weather{
-    width: 250px;
+    width: 400px;
     height: 150px;
     background-color:whitesmoke;
     margin-bottom: 20px;
 }
 
-.table-location{
-    width: 250px;
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+.table{
+    width: 400px;
     height: 150px;
     background-color:blue;
+}
 
+.goto-btn{
+    background-color:green;
+}
+
+.dalete-btn{
+    background-color: red;
 }
 
 .map{
