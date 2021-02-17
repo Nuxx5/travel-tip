@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+button {
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+}
+
+.main-container {
+    width: 650px;
+    height: 550px;
+    margin: 0 auto;
+    padding: 20px 10px 0 10px;
+    background-color: peru;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.nav{
+    margin-right: 10px;
+}
+
+.search-text {
+    height: 25px;
+    width: 150px;
+}
+
+.my-location-btn{
+    width: 120px;
+}
+
+.location-nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+.copy-location-btn{
+    width: 140px;
+    margin-right: 10px;
+}
+
+.main-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather{
+    width: 250px;
+    height: 150px;
+    background-color:whitesmoke;
+    margin-bottom: 20px;
+}
+
+.table-location{
+    width: 250px;
+    height: 150px;
+    background-color:blue;
+
+}
+
+.map{
+    width: 380px;
+    height: 320px;
+}
