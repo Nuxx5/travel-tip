@@ -15,12 +15,12 @@
             <div class="nav">
                 <input class="search-text" type="text" id="text-line" onfocus="this.placeholder=''"
                     placeholder="text-line" name="text-line" autocomplete="off" />
-                <button onclick="onSearch()">GO</button>
+                <button onclick="onSearch(event)">GO</button>
                 <button class="my-location-btn" onclick="onShowMyLocation()">My Location</button>
             </div>
         </header>
         <section class="location-nav">
-            <h2 class="location">Location:</h2>
+            <h2 class="location">Location: <span></span></h2>
             <button class="copy-location-btn" onclick="onCopyLocation()">Copy Location</button>
         </section>
         <section class="main-content">
@@ -48,7 +48,7 @@
         </section>
     </main>
 
-
+    <script src="lib/axios.js"></script>
     <script type="module" src="js/map-controller.js"></script>
 </body>
 

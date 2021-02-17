@@ -2,7 +2,7 @@
 
 import { mapService } from './services/map-service.js';
 
-// window.onSearch = onSearch;
+window.onSearch = onSearch;
 window.onGoToPlace = onGoToPlace;
 window.onRemovePlace = onRemovePlace;
 window.onShowMyLocation = onShowMyLocation;
@@ -95,7 +95,17 @@ function onRemovePlace(placeId) {
 
 function onGoToPlace(placeId) {
     var place = mapService.getPlaceById(placeId)
+    document.querySelector('h2 span').innerText = place.name;
     initMap(place.lat, place.lng);
+}
+
+function onSearch(ev){
+    if (ev) ev.preventDefault();
+    const txt = document.querySelector('.search-text').value;
+    mapService.search(txt);
+    
+    console.log('txt', txt);
+    
 }
 
 function onShowMyLocation() {
